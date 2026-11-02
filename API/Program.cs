@@ -11,11 +11,13 @@ builder.Services.AddControllers();
     opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? [];
-// builder.Services.AddCors(options =>
-//     options.AddPolicy(ClientCorsPolicy, policy =>
+//  builder.Services.AddCors(options =>     options.AddPolicy(ClientCorsPolicy, policy =>
 //         policy.WithOrigins(allowedOrigins).AllowAnyHeader().AllowAnyMethod()));
 
 var app = builder.Build();
+
+app.UseCors ( x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200", 
+"https://localhost:4200"));
 
 // if (app.Environment.IsDevelopment())
 // {
